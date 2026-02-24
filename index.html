@@ -3,85 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meus Exercícios - GitHub</title>
+    <title>Hulk Exercises - GitHub</title>
     <style>
-        /* Estilo Clássico / Vintage */
+        :root {
+            --gamma-green: #2ecc71;
+            --hulk-purple: #8e44ad;
+            --deep-dark: #0a0a0a;
+            --comic-border: #000;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            background-color: #f4f1ea; /* Papel antigo */
-            font-family: 'Georgia', 'Times New Roman', serif;
-            margin: 0;
+            /* Imagem do Hulk de fundo combinada com textura de quadrinhos */
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('huckimagem.jpg'),
+                url('https://www.transparenttextures.com');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Bangers', 'Segoe UI', Impact, sans-serif;
+            color: #fff;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            padding: 40px 20px;
+            perspective: 1000px;
         }
 
         .container {
-            background-color: #fffdf9;
-            padding: 50px;
-            border: 2px solid #5d4037;
-            box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
-            text-align: center;
+            background-color: rgba(142, 68, 173, 0.95); /* Roxo com leve transparência */
+            padding: 40px;
             width: 100%;
-            max-width: 450px;
+            max-width: 600px;
+            border-radius: 5px;
+            border: 5px solid var(--comic-border);
+            box-shadow: 15px 15px 0px var(--comic-border);
+            transform: rotateX(5deg);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .container:hover {
+            transform: rotateX(0deg) scale(1.02);
         }
 
         h1 {
-            color: #2c1e1a;
-            font-variant: small-caps;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            border-bottom: 2px solid #5d4037;
-            padding-bottom: 10px;
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            color: var(--gamma-green);
+            text-transform: uppercase;
+            -webkit-text-stroke: 2px var(--comic-border);
+            text-shadow: 5px 5px 0px var(--comic-border);
+        }
+
+        .category { margin-bottom: 15px; }
+
+        .category-btn {
+            width: 100%;
+            background-color: var(--gamma-green);
+            color: var(--comic-border);
+            border: 3px solid var(--comic-border);
+            padding: 15px 20px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 6px 6px 0px var(--comic-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.2s;
+        }
+
+        .category-btn:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px var(--comic-border);
+            background-color: #27ae60;
         }
 
         .link-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .link-list.show {
+            max-height: 500px;
+            padding: 15px 5px;
+            border: 3px solid var(--comic-border);
+            border-top: none;
+            margin-top: -3px;
         }
 
         .link-item {
             text-decoration: none;
-            color: #5d4037;
-            font-size: 1.2rem;
+            color: #fff;
+            background-color: rgba(255,255,255,0.1);
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            display: block;
+            border: 2px solid transparent;
+            transition: 0.2s;
+            font-family: 'Segoe UI', sans-serif;
             font-weight: bold;
-            padding: 12px;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
         }
 
-        /* Efeito de destaque ao passar o mouse */
         .link-item:hover {
-            background-color: #fdfaf0;
-            border: 1px solid #5d4037;
-            font-style: italic;
-            letter-spacing: 1px;
+            background-color: var(--gamma-green);
+            color: var(--comic-border);
+            transform: translateX(10px);
         }
 
         footer {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: #8d7b6d;
+            margin-top: auto;
+            background: var(--comic-border);
+            color: var(--gamma-green);
+            padding: 10px 30px;
+            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+            font-size: 1.2rem;
         }
     </style>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
 </head>
 <body>
 
     <div class="container">
-        <h1>Meus Exercícios</h1>
-        
-        <div class="link-list">
-            <a href="https://github.com/salivamolhada/Exercicios/blob/main/bhaskara.js" target="_blank" class="link-item">Bhaskara.js</a>
-            <a href="https://github.com/salivamolhada/Exercicios/blob/main/carro.js" target="_blank" class="link-item">Carro.js</a>
-            <a href="https://github.com/salivamolhada/Exercicios/blob/main/notas.js" target="_blank" class="link-item">Notas.js</a>
-            <a href="https://salivamolhada.github.io/..a/teste.html" target="_blank" class="link-item">Teste.html</a>
-            <a href="https://github.com/salivamolhada/Exercicios/blob/main/teste.js" target="_blank" class="link-item">Teste.js</a>
-            <a href="https://github.com/salivamolhada/Exercicios/blob/main/teste2.js" target="_blank" class="link-item">Teste2.js</a>
+        <h1>HULK CODE!</h1>
+
+        <div class="category">
+            <button class="category-btn" onclick="toggleCategory('java', this)">Exercícios Java</button>
+            <div id="java" class="link-list">
+                <a href="https://github.com" target="_blank" class="link-item">Exemplo 1 - Introdução</a>
+                <a href="https://github.com" target="_blank" class="link-item">Exemplo 2 - Lógica Básica</a>
+            </div>
         </div>
 
-        <footer>salivamolhada @ GitHub</footer>
+        <div class="category">
+            <button class="category-btn" onclick="toggleCategory('python', this)">Exercícios Python</button>
+            <div id="python" class="link-list">
+                <a href="#" target="_blank" class="link-item">Exemplo 1 - Variáveis</a>
+                <a href="#" target="_blank" class="link-item">Exemplo 2 - Condicionais</a>
+            </div>
+        </div>
+
+        <div class="category">
+            <button class="category-btn" onclick="toggleCategory('html', this)">Exercícios HTML / JS</button>
+            <div id="html" class="link-list">
+                <a href="https://github.com" target="_blank" class="link-item">Cálculo de Bhaskara (JS)</a>
+                <a href="https://salivamolhada.github.io" target="_blank" class="link-item">Página de Teste (Live)</a>
+            </div>
+        </div>
+
     </div>
 
+    <footer>
+        DESENVOLVIDO POR @SALIVAMOLHADA - 2026
+    </footer>
+
+    <script>
+        function toggleCategory(id, btn) {
+            const list = document.getElementById(id);
+            if (list) {
+                list.classList.toggle('show');
+                btn.classList.toggle('active');
+            }
+        }
+    </script>
 </body>
 </html>
