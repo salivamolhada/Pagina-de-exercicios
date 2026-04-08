@@ -15,11 +15,10 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            /* Imagem do Hulk de fundo combinada com textura de quadrinhos */
             background: 
                 linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
                 url('huckimagem.jpg'),
-                url('https://www.transparenttextures.com');
+                url('https://transparenttextures.com');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -34,7 +33,7 @@
         }
 
         .container {
-            background-color: rgba(142, 68, 173, 0.95); /* Roxo com leve transparência */
+            background-color: rgba(142, 68, 173, 0.95);
             padding: 40px;
             width: 100%;
             max-width: 600px;
@@ -85,20 +84,34 @@
             background-color: #27ae60;
         }
 
+        /* --- ALTERAÇÃO AQUI: ADICIONADO SCROLL --- */
         .link-list {
             max-height: 0;
-            overflow: hidden;
+            overflow-y: auto; /* Permite a rolagem vertical */
             transition: max-height 0.4s ease;
             background: rgba(0,0,0,0.5);
         }
 
+        /* Personalização da barra de rolagem (Estilo Hulk) */
+        .link-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        .link-list::-webkit-scrollbar-track {
+            background: var(--hulk-purple);
+        }
+        .link-list::-webkit-scrollbar-thumb {
+            background: var(--gamma-green);
+            border: 1px solid var(--comic-border);
+        }
+
         .link-list.show {
-            max-height: 500px;
+            max-height: 400px; /* Altura máxima antes de começar a rolar */
             padding: 15px 5px;
             border: 3px solid var(--comic-border);
             border-top: none;
             margin-top: -3px;
         }
+        /* ---------------------------------------- */
 
         .link-item {
             text-decoration: none;
@@ -128,7 +141,7 @@
             font-size: 1.2rem;
         }
     </style>
-    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <link href="https://googleapis.com" rel="stylesheet">
 </head>
 <body>
 
@@ -138,17 +151,17 @@
         <div class="category">
             <button class="category-btn" onclick="toggleCategory('java', this)">Exercícios Java</button>
             <div id="java" class="link-list">
-                <a href="https://github.com/salivamolhada/..a" target="_blank" class="link-item">1ª Aula Back End</a>
+                <a href="https://github.com" target="_blank" class="link-item">1ª Aula Back End</a>
                 <a href="https://github.com" target="_blank" class="link-item">Exemplo 2 - Lógica Básica</a>
-                <a  href="https://salivamolhada.github.io/variaveis.js/variaveis.js" target="_blank" class="link-item">Exemplo das variaveis</a>
-                       <a  href="https://github.com/salivamolhada/usandoform" target="_blank" class="link-item">Usando form</a>
-                 <a  href="https://github.com/salivamolhada/usandoreak" target="_blank" class="link-item">Usando form</a>
-                <a  href="https://github.com/salivamolhada/break_continue.js/blob/main/brake_continue.js" target="_blank" class="link-item">Teste estacionamento</a>
-                 <a  href="https://github.com/salivamolhada/obejto.js" target="_blank" class="link-item">Objeto</a>
-                 <a  href="https://github.com/salivamolhada/filtrarr.js" target="_blank" class="link-item" >Filtrar</a>
-                 <a  href="https://github.com/salivamolhada/colchete.js" target="_blank" class="link-item" >Mural Codigos</a>
-                 <a  href="https://github.com/salivamolhada/2arquivos" target="_blank" class="link-item" >Figurinhas</a>
-                <a  href="https://github.com/salivamolhada/atividade-07-04" >select</a>
+                <a href="https://github.io" target="_blank" class="link-item">Exemplo das variaveis</a>
+                <a href="https://github.com" target="_blank" class="link-item">Usando form</a>
+                <a href="https://github.com" target="_blank" class="link-item">Usando react</a>
+                <a href="https://github.com" target="_blank" class="link-item">Teste estacionamento</a>
+                <a href="https://github.com" target="_blank" class="link-item">Objeto</a>
+                <a href="https://github.com" target="_blank" class="link-item" >Filtrar</a>
+                <a href="https://github.com" target="_blank" class="link-item" >Mural Codigos</a>
+                <a href="https://github.com" target="_blank" class="link-item" >Figurinhas</a>
+                <a href="https://github.com" target="_blank" class="link-item">Select</a>
             </div>
         </div>
 
@@ -163,20 +176,20 @@
         <div class="category">
             <button class="category-btn" onclick="toggleCategory('html', this)">Exercícios HTML</button>
             <div id="html" class="link-list">
-                <a href="https://salivamolhada.github.io/..a/teste.html" target="_blank" class="link-item">Teste Html</a>
-                <a href="https://salivamolhada.github.io" target="_blank" class="link-item">Página de Teste (Live)</a>
-                 <a href="https://gamma.app/docs/Propriedade-Intelectual-Protegendo-e-Valorizando-Criacoes-e-Inova-6jxddtxaxhx9nne?mode=doc" target="_blank" class="link-item">Gamma 1 (Live)</a>
-                 <a href=https://gamma.app/docs/Agenda-Escolar-Digital-O-Cerebro-da-Sua-Escola-nctq152ualg7c3g?mode=doc" target="_blank" class="link-item">Gamma 2 (Live)</a>
-                  <a href=https://gamma.app/docs/Analise-de-Startup-de-IA-pkoged8pybktjoi?mode=doc" target="_blank" class="link-item">Gamma 3 (Live)</a>
-                  <a href=https://gamma.app/docs/Metricas-e-Melhorias-Continuas-nos-Negocios-fnd2v0rpznw1glg?mode=present#card-radwgzr7rp48jo6=doc" target="_blank" class="link-item">Gamma 4 (Live)</a>
-                               <a  href="https://salivamolhada.github.io/copa/figurinhas.html" target="_blank" class="link-item" >Mural Codigos2</a>
+                <a href="https://github.io" target="_blank" class="link-item">Teste Html</a>
+                <a href="https://github.io" target="_blank" class="link-item">Página de Teste (Live)</a>
+                <a href="https://gamma.app" target="_blank" class="link-item">Gamma 1 (Live)</a>
+                <a href="https://gamma.app" target="_blank" class="link-item">Gamma 2 (Live)</a>
+                <a href="https://gamma.app" target="_blank" class="link-item">Gamma 3 (Live)</a>
+                <a href="https://gamma.app" target="_blank" class="link-item">Gamma 4 (Live)</a>
+                <a href="https://github.io/copa/figurinhas.html" target="_blank" class="link-item" >Mural Codigos2</a>
             </div>
         </div>
 
     </div>
 
     <footer>
-        DESENVOLVIDO POR @SALIVAMOLHADA - 2026
+        DESENVOLVIDO POR @DOWN
     </footer>
 
     <script>
@@ -190,18 +203,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
