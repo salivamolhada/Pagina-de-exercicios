@@ -3,203 +3,508 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hulk Exercises - GitHub</title>
+    <title>Thragg Exercises - Viltrumita Code</title>
     <style>
         :root {
-            --gamma-green: #2ecc71;
-            --hulk-purple: #8e44ad;
-            --deep-dark: #0a0a0a;
-            --comic-border: #000;
+            --viltrumite-red: #c41e3a;
+            --thragg-gold: #d4af37;
+            --imperial-blue: #0a1929;
+            --cosmic-black: #000000;
+            --blood-red: #8b0000;
+            --scar-white: #e0e0e0;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        @keyframes floatAnimation {
+            0%, 100% { transform: translateY(0px) rotateX(3deg); }
+            50% { transform: translateY(-10px) rotateX(1deg); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px var(--thragg-gold),
+                           0 0 40px var(--viltrumite-red),
+                           15px 15px 0px var(--cosmic-black);
+            }
+            50% { 
+                box-shadow: 0 0 40px var(--thragg-gold),
+                           0 0 80px var(--viltrumite-red),
+                           20px 20px 0px var(--cosmic-black);
+            }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { border-color: var(--thragg-gold); }
+            50% { border-color: var(--viltrumite-red); }
+        }
+
+        @keyframes textShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        @keyframes viltrumiteFloat {
+            0% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(-1deg); }
+            75% { transform: translateY(4px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        @keyframes evilGlow {
+            0%, 100% { filter: drop-shadow(0 0 15px var(--viltrumite-red)) drop-shadow(0 0 30px var(--thragg-gold)); }
+            50% { filter: drop-shadow(0 0 30px #fff) drop-shadow(0 0 60px var(--viltrumite-red)); }
+        }
 
         body {
             background: 
-                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('huckimagem.jpg'),
-                url('https://transparenttextures.com');
+                radial-gradient(circle at 20% 50%, rgba(196, 30, 58, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--imperial-blue) 0%, var(--cosmic-black) 50%, var(--blood-red) 100%);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            font-family: 'Bangers', 'Segoe UI', Impact, sans-serif;
-            color: #fff;
+            font-family: 'Cinzel', 'Times New Roman', serif;
+            color: var(--scar-white);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
             padding: 40px 20px;
-            perspective: 1000px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(1px 1px at 10% 20%, rgba(212, 175, 55, 0.3), transparent),
+                radial-gradient(1px 1px at 20% 40%, rgba(196, 30, 58, 0.3), transparent),
+                radial-gradient(1px 1px at 30% 60%, rgba(212, 175, 55, 0.3), transparent),
+                radial-gradient(1px 1px at 40% 80%, rgba(196, 30, 58, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 10%, rgba(212, 175, 55, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 30%, rgba(139, 0, 0, 0.4), transparent),
+                radial-gradient(1px 1px at 70% 50%, rgba(212, 175, 55, 0.3), transparent),
+                radial-gradient(2px 2px at 80% 70%, rgba(196, 30, 58, 0.3), transparent),
+                radial-gradient(1px 1px at 90% 90%, rgba(212, 175, 55, 0.3), transparent);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
-            background-color: rgba(142, 68, 173, 0.95);
+            background: linear-gradient(135deg, 
+                rgba(10, 25, 41, 0.95) 0%, 
+                rgba(139, 0, 0, 0.9) 50%,
+                rgba(10, 25, 41, 0.95) 100%);
             padding: 40px;
             width: 100%;
-            max-width: 600px;
-            border-radius: 5px;
-            border: 5px solid var(--comic-border);
-            box-shadow: 15px 15px 0px var(--comic-border);
-            transform: rotateX(5deg);
-            transition: transform 0.3s ease;
-            backdrop-filter: blur(5px);
+            max-width: 650px;
+            border-radius: 10px;
+            border: 4px solid var(--thragg-gold);
+            box-shadow: 0 0 30px var(--thragg-gold), 
+                       0 0 60px var(--viltrumite-red),
+                       20px 20px 0px var(--cosmic-black);
+            animation: floatAnimation 4s ease-in-out infinite, 
+                      glowPulse 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
         }
 
-        .container:hover {
-            transform: rotateX(0deg) scale(1.02);
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                var(--viltrumite-red), 
+                var(--thragg-gold), 
+                var(--viltrumite-red), 
+                var(--thragg-gold));
+            background-size: 400% 400%;
+            border-radius: 12px;
+            z-index: -1;
+            animation: borderGlow 2s linear infinite;
+            filter: blur(5px);
+            opacity: 0.7;
+        }
+
+        .title-container {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
         h1 {
-            text-align: center;
-            font-size: 3.5rem;
-            margin-bottom: 30px;
-            color: var(--gamma-green);
+            font-size: 4rem;
+            font-weight: 900;
             text-transform: uppercase;
-            -webkit-text-stroke: 2px var(--comic-border);
-            text-shadow: 5px 5px 0px var(--comic-border);
+            letter-spacing: 5px;
+            background: linear-gradient(to bottom, 
+                var(--thragg-gold) 0%, 
+                #fff 50%, 
+                var(--thragg-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px var(--viltrumite-red))
+                   drop-shadow(0 0 40px var(--thragg-gold));
+            margin-bottom: 10px;
+            position: relative;
         }
 
-        .category { margin-bottom: 15px; }
+        h1:hover {
+            animation: textShake 0.5s ease-in-out;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--scar-white);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            font-style: italic;
+            opacity: 0.8;
+            animation: slideIn 2s ease-out;
+        }
+
+        .category { 
+            margin-bottom: 20px;
+            animation: slideIn 0.5s ease-out;
+        }
 
         .category-btn {
             width: 100%;
-            background-color: var(--gamma-green);
-            color: var(--comic-border);
-            border: 3px solid var(--comic-border);
-            padding: 15px 20px;
-            font-size: 1.4rem;
+            background: linear-gradient(135deg, 
+                var(--viltrumite-red) 0%, 
+                var(--blood-red) 100%);
+            color: var(--scar-white);
+            border: 3px solid var(--thragg-gold);
+            padding: 18px 25px;
+            font-size: 1.3rem;
             font-weight: 900;
             text-transform: uppercase;
+            letter-spacing: 2px;
             cursor: pointer;
-            box-shadow: 6px 6px 0px var(--comic-border);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: 0.2s;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(212, 175, 55, 0.3), 
+                transparent);
+            transition: left 0.5s ease;
+        }
+
+        .category-btn:hover::before {
+            left: 100%;
         }
 
         .category-btn:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 9px 9px 0px var(--comic-border);
-            background-color: #27ae60;
+            transform: scale(1.02) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5),
+                       0 0 50px rgba(196, 30, 58, 0.5);
+            background: linear-gradient(135deg, 
+                var(--thragg-gold) 0%, 
+                var(--viltrumite-red) 100%);
+            color: var(--cosmic-black);
+            border-color: #fff;
         }
 
-        /* --- ALTERAÇÃO AQUI: ADICIONADO SCROLL --- */
+        .category-btn.active {
+            background: linear-gradient(135deg, 
+                var(--thragg-gold) 0%, 
+                #fff 100%);
+            color: var(--cosmic-black);
+            border-color: var(--viltrumite-red);
+            box-shadow: 0 0 30px var(--thragg-gold);
+        }
+
+        .btn-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 5px var(--thragg-gold));
+        }
+
+        .category-btn.active .btn-icon {
+            transform: rotate(180deg);
+        }
+
         .link-list {
             max-height: 0;
-            overflow-y: auto; /* Permite a rolagem vertical */
-            transition: max-height 0.4s ease;
-            background: rgba(0,0,0,0.5);
+            overflow-y: auto;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            border: 2px solid transparent;
+            border-radius: 0 0 8px 8px;
         }
 
-        /* Personalização da barra de rolagem (Estilo Hulk) */
         .link-list::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
+
         .link-list::-webkit-scrollbar-track {
-            background: var(--hulk-purple);
+            background: var(--imperial-blue);
+            border-radius: 10px;
         }
+
         .link-list::-webkit-scrollbar-thumb {
-            background: var(--gamma-green);
-            border: 1px solid var(--comic-border);
+            background: linear-gradient(180deg, 
+                var(--viltrumite-red), 
+                var(--thragg-gold));
+            border-radius: 10px;
+            border: 2px solid var(--cosmic-black);
+        }
+
+        .link-list::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, 
+                var(--thragg-gold), 
+                var(--viltrumite-red));
         }
 
         .link-list.show {
-            max-height: 400px; /* Altura máxima antes de começar a rolar */
-            padding: 15px 5px;
-            border: 3px solid var(--comic-border);
+            max-height: 450px;
+            padding: 20px 10px;
+            border: 3px solid var(--thragg-gold);
             border-top: none;
-            margin-top: -3px;
+            margin-top: -2px;
         }
-        /* ---------------------------------------- */
 
         .link-item {
             text-decoration: none;
-            color: #fff;
-            background-color: rgba(255,255,255,0.1);
-            padding: 12px 15px;
-            margin-bottom: 8px;
+            color: var(--scar-white);
+            background: linear-gradient(90deg, 
+                rgba(196, 30, 58, 0.2) 0%, 
+                rgba(212, 175, 55, 0.1) 100%);
+            padding: 15px 20px;
+            margin-bottom: 10px;
             display: block;
-            border: 2px solid transparent;
-            transition: 0.2s;
+            border-left: 4px solid var(--thragg-gold);
+            transition: all 0.3s ease;
             font-family: 'Segoe UI', sans-serif;
-            font-weight: bold;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(212, 175, 55, 0.2), 
+                transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .link-item:hover::before {
+            transform: translateX(100%);
         }
 
         .link-item:hover {
-            background-color: var(--gamma-green);
-            color: var(--comic-border);
-            transform: translateX(10px);
+            background: linear-gradient(90deg, 
+                var(--viltrumite-red) 0%, 
+                var(--blood-red) 100%);
+            color: #fff;
+            transform: translateX(10px) scale(1.02);
+            border-left-width: 8px;
+            border-left-color: #fff;
+            box-shadow: 0 5px 20px rgba(196, 30, 58, 0.5);
         }
 
         footer {
-            margin-top: auto;
-            background: var(--comic-border);
-            color: var(--gamma-green);
-            padding: 10px 30px;
-            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+            margin-top: 50px;
+            background: linear-gradient(90deg, 
+                var(--cosmic-black) 0%, 
+                var(--imperial-blue) 50%, 
+                var(--cosmic-black) 100%);
+            color: var(--thragg-gold);
+            padding: 15px 40px;
             font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: 2px solid var(--viltrumite-red);
+            border-radius: 5px;
+            position: relative;
+            z-index: 1;
+            animation: glowPulse 4s ease-in-out infinite;
+            text-shadow: 0 0 10px var(--thragg-gold);
+        }
+
+        /* Container para o Thragg animado */
+        .thragg-animation {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 2;
+            width: 200px;
+            height: auto;
+            animation: viltrumiteFloat 4s ease-in-out infinite, evilGlow 2.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .thragg-animation img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 25px;
+                box-shadow: 0 0 20px var(--thragg-gold), 
+                          10px 10px 0px var(--cosmic-black);
+            }
+
+            .thragg-animation {
+                width: 120px;
+                bottom: 10px;
+                left: 10px;
+            }
         }
     </style>
-    <link href="https://googleapis.com" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <!-- Thragg Animado (GIF) -->
+    <div class="thragg-animation">
+        <!-- Substitua o src pelo link do GIF desejado -->
+        <img src="trag.image.gif" alt="Thragg Animation">
+    </div>
+
     <div class="container">
-        <h1>HULK CODE!</h1>
+        <div class="title-container">
+            <h1>THRAGG CODE</h1>
+            <p class="subtitle">Conhecimento Viltrumita</p>
+        </div>
 
         <div class="category">
-            <button class="category-btn" onclick="toggleCategory('java', this)">Exercícios Java</button>
+            <button class="category-btn" onclick="toggleCategory('java', this)">
+                Java Exercises
+                <span class="btn-icon">▼</span>
+            </button>
             <div id="java" class="link-list">
-                <a href="https://github.com/salivamolhada/..a" target="_blank" class="link-item">1ª Aula Back End</a>
-                <a href="https://github.com/salivamolhada/logica-baisca" target="_blank" class="link-item">Exemplo 2 - Lógica Básica</a>
-                <a href="https://github.com/salivamolhada/variaveis.js" target="_blank" class="link-item">Exemplo das variaveis</a>
-                <a href="https://github.com/salivamolhada/usandoform" target="_blank" class="link-item">Usando form</a>
-                <a href="https://github.com/salivamolhada/usandoreak"  target="_blank" class="link-item">Usando react</a>
-                <a href="https://github.com/salivamolhada/estacionamento" target="_blank" class="link-item">Teste estacionamento</a>
-                <a href="https://github.com/salivamolhada/obejto.js" target="_blank" class="link-item">Objeto</a>
-                <a href="https://github.com/salivamolhada/filtrarr.js" target="_blank" class="link-item" >Filtrar</a>
-                <a href="https://github.com/salivamolhada/Mural-codigos" target="_blank" class="link-item" >Mural Codigos</a>
-                <a href="https://salivamolhada.github.io/figurinhas.html/figurinhas.html" target="_blank" class="link-item" >Figurinhas</a>
-                <a href="https://github.com/salivamolhada/select" target="_blank" class="link-item">Select</a>
-                 <a href="https://github.com/salivamolhada/snack" target="_blank" class="link-item">Snack</a>
-                <a href="https://github.com/salivamolhada/qrcode-da-atividade-dia-24-04-26" target="_blank" class="link-item">Snack 2</a>
+                <a href="https://github.com/salivamolhada/..a" target="_blank" class="link-item">⚔️ 1ª Aula Back End</a>
+                <a href="https://github.com/salivamolhada/logica-baisca" target="_blank" class="link-item">⚔️ Lógica Básica</a>
+                <a href="https://github.com/salivamolhada/variaveis.js" target="_blank" class="link-item">⚔️ Variáveis</a>
+                <a href="https://github.com/salivamolhada/usandoform" target="_blank" class="link-item">⚔️ Usando Form</a>
+                <a href="https://github.com/salivamolhada/usandoreak" target="_blank" class="link-item">⚔️ Usando React</a>
+                <a href="https://github.com/salivamolhada/estacionamento" target="_blank" class="link-item">⚔️ Estacionamento</a>
+                <a href="https://github.com/salivamolhada/obejto.js" target="_blank" class="link-item">⚔️ Objeto</a>
+                <a href="https://github.com/salivamolhada/filtrarr.js" target="_blank" class="link-item">⚔️ Filtrar</a>
+                <a href="https://github.com/salivamolhada/Mural-codigos" target="_blank" class="link-item">⚔️ Mural Códigos</a>
+                <a href="https://salivamolhada.github.io/figurinhas.html/figurinhas.html" target="_blank" class="link-item">⚔️ Figurinhas</a>
+                <a href="https://github.com/salivamolhada/select" target="_blank" class="link-item">⚔️ Select</a>
+                <a href="https://github.com/salivamolhada/snack" target="_blank" class="link-item">⚔️ Snack</a>
+                <a href="https://github.com/salivamolhada/qrcode-da-atividade-dia-24-04-26" target="_blank" class="link-item">⚔️ Snack 2</a>
             </div>
         </div>
 
         <div class="category">
-            <button class="category-btn" onclick="toggleCategory('python', this)">Exercícios Python</button>
+            <button class="category-btn" onclick="toggleCategory('python', this)">
+                Python Exercises
+                <span class="btn-icon">▼</span>
+            </button>
             <div id="python" class="link-list">
-                <a href="https://github.com/salivamolhada/variaveis.js" target="_blank" class="link-item">Exemplo 1 - Variáveis</a>
-                <a href="#" target="_blank" class="link-item">Exemplo 2 - Condicionais</a>
+                <a href="https://github.com/salivamolhada/variaveis.js" target="_blank" class="link-item">⚔️ Variáveis</a>
+                <a href="#" target="_blank" class="link-item">⚔️ Condicionais</a>
             </div>
         </div>
 
         <div class="category">
-            <button class="category-btn" onclick="toggleCategory('html', this)">Exercícios HTML</button>
+            <button class="category-btn" onclick="toggleCategory('html', this)">
+                HTML Exercises
+                <span class="btn-icon">▼</span>
+            </button>
             <div id="html" class="link-list">
-                <a href="https://github.com/salivamolhada/testes.js" target="_blank" class="link-item">Teste Html</a>
-                <a href="https://salivamolhada.github.io/testes.js/teste.html" target="_blank" class="link-item">Página de Teste (Live)</a>
-                <a href="https://gamma.app/docs/Propriedade-Intelectual-Protegendo-e-Valorizando-Criacoes-e-Inova-6jxddtxaxhx9nne?mode=doc" target="_blank" class="link-item">Gamma 1 (Live)</a>
-                <a href="https://gamma.app/docs/Metricas-e-Melhorias-Continuas-nos-Negocios-fnd2v0rpznw1glg" target="_blank" class="link-item">Gamma 2 (Live)</a>
-                <a href="https://gamma.app/docs/Agenda-Escolar-Digital-O-Cerebro-da-Sua-Escola-nctq152ualg7c3g?mode=doc" target="_blank" class="link-item">Gamma 3 (Live)</a>
-                <a href="https://gamma.app/docs/Analise-de-Startup-de-IA-pkoged8pybktjoi" target="_blank" class="link-item">Gamma 4 (Live)</a>
-                <a href="https://github.io/copa/figurinhas.html" target="_blank" class="link-item" >Mural Codigos2</a>
+                <a href="https://github.com/salivamolhada/testes.js" target="_blank" class="link-item">⚔️ Teste HTML</a>
+                <a href="https://salivamolhada.github.io/testes.js/teste.html" target="_blank" class="link-item">⚔️ Página de Teste</a>
+                <a href="https://gamma.app/docs/Propriedade-Intelectual-Protegendo-e-Valorizando-Criacoes-e-Inova-6jxddtxaxhx9nne?mode=doc" target="_blank" class="link-item">⚔️ Gamma 1</a>
+                <a href="https://gamma.app/docs/Metricas-e-Melhorias-Continuas-nos-Negocios-fnd2v0rpznw1glg" target="_blank" class="link-item">⚔️ Gamma 2</a>
+                <a href="https://gamma.app/docs/Agenda-Escolar-Digital-O-Cerebro-da-Sua-Escola-nctq152ualg7c3g?mode=doc" target="_blank" class="link-item">⚔️ Gamma 3</a>
+                <a href="https://gamma.app/docs/Analise-de-Startup-de-IA-pkoged8pybktjoi" target="_blank" class="link-item">⚔️ Gamma 4</a>
+                <a href="https://github.io/copa/figurinhas.html" target="_blank" class="link-item">⚔️ Mural Códigos 2</a>
             </div>
         </div>
-
     </div>
 
     <footer>
-        DESENVOLVIDO POR @DOWN
+        ⚡ DESENVOLVIDO POR @DOWN - STAND READY FOR MY ARRIVAL, WORM ⚡
     </footer>
 
     <script>
         function toggleCategory(id, btn) {
             const list = document.getElementById(id);
             if (list) {
+                // Fecha outras categorias primeiro
+                document.querySelectorAll('.link-list.show').forEach(item => {
+                    if (item.id !== id) {
+                        item.classList.remove('show');
+                        // Remove active dos outros botões
+                        item.previousElementSibling?.classList.remove('active');
+                    }
+                });
+                
+                // Toggle na categoria clicada
                 list.classList.toggle('show');
                 btn.classList.toggle('active');
+                
+                // Scroll suave até a lista se estiver abrindo
+                if (list.classList.contains('show')) {
+                    setTimeout(() => {
+                        list.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'nearest' 
+                        });
+                    }, 100);
+                }
             }
         }
     </script>
