@@ -373,7 +373,6 @@
             text-shadow: 0 0 10px var(--thragg-gold);
         }
 
-        /* Container para o Thragg animado */
         .thragg-animation {
             position: fixed;
             bottom: 20px;
@@ -413,9 +412,7 @@
 </head>
 <body>
 
-    <!-- Thragg Animado (GIF) -->
     <div class="thragg-animation">
-        <!-- Substitua o src pelo link do GIF desejado -->
         <img src="thrag.image.gif" alt="Thragg Animation">
     </div>
 
@@ -425,6 +422,7 @@
             <p class="subtitle">Conhecimento Viltrumita</p>
         </div>
 
+        <!-- Categoria Java -->
         <div class="category">
             <button class="category-btn" onclick="toggleCategory('java', this)">
                 Java Exercises
@@ -442,11 +440,10 @@
                 <a href="https://github.com/salivamolhada/Mural-codigos" target="_blank" class="link-item">⚔️ Mural Códigos</a>
                 <a href="https://salivamolhada.github.io/figurinhas.html/figurinhas.html" target="_blank" class="link-item">⚔️ Figurinhas</a>
                 <a href="https://github.com/salivamolhada/select" target="_blank" class="link-item">⚔️ Select</a>
-                
-                
             </div>
         </div>
 
+        <!-- Categoria Python -->
         <div class="category">
             <button class="category-btn" onclick="toggleCategory('python', this)">
                 Python Exercises
@@ -458,6 +455,7 @@
             </div>
         </div>
 
+        <!-- Categoria HTML (corrigida, sem aninhamento) -->
         <div class="category">
             <button class="category-btn" onclick="toggleCategory('html', this)">
                 HTML Exercises
@@ -471,15 +469,18 @@
                 <a href="https://gamma.app/docs/Agenda-Escolar-Digital-O-Cerebro-da-Sua-Escola-nctq152ualg7c3g?mode=doc" target="_blank" class="link-item">⚔️ Gamma 3</a>
                 <a href="https://gamma.app/docs/Analise-de-Startup-de-IA-pkoged8pybktjoi" target="_blank" class="link-item">⚔️ Gamma 4</a>
                 <a href="https://github.io/copa/figurinhas.html" target="_blank" class="link-item">⚔️ Mural Códigos 2</a>
-                 <a href="https://salivamolhada.github.io/pacman/pacman.html" target="_blank" class="link-item">⚔️ Pacman</a>
+                <a href="https://salivamolhada.github.io/pacman/pacman.html" target="_blank" class="link-item">⚔️ Pacman</a>
+            </div>
+        </div>
 
-                 <div class="category">
-            <button class="category-btn" onclick="toggleCategory('html', this)">
+        <!-- Categoria Programação Mobile (nova, independente) -->
+        <div class="category">
+            <button class="category-btn" onclick="toggleCategory('mobile', this)">
                 Programação Mobile
                 <span class="btn-icon">▼</span>
             </button>
-            <div id="html" class="link-list">
-              <a href="https://github.com/salivamolhada/snack" target="_blank" class="link-item">⚔️ Snack</a> 
+            <div id="mobile" class="link-list">
+                <a href="https://github.com/salivamolhada/snack" target="_blank" class="link-item">⚔️ Snack</a> 
                 <a href="https://github.com/salivamolhada/qrcode-da-atividade-dia-24-04-26" target="_blank" class="link-item">⚔️ Snack 2</a>
             </div>
         </div>
@@ -498,7 +499,8 @@
                     if (item.id !== id) {
                         item.classList.remove('show');
                         // Remove active dos outros botões
-                        item.previousElementSibling?.classList.remove('active');
+                        const otherBtn = item.previousElementSibling;
+                        if (otherBtn && otherBtn.classList) otherBtn.classList.remove('active');
                     }
                 });
                 
