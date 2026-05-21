@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Vinícius Lourenço | Dev Portfolio</title>
+    <title>Vinícius Lourenço | Dev Portfolio + Colégio Unidade Polo</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -23,6 +23,8 @@
             --text-main: #f5f5f5;
             --text-dim: #b9b9c3;
             --transition-bounce: cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            --polo-blue: #0a4d8c;
+            --polo-gold: #d4af37;
         }
 
         body {
@@ -168,7 +170,7 @@
             margin-top: 0.5rem;
         }
 
-        .btn-portfolio, .btn-linkedin {
+        .btn-portfolio, .btn-linkedin, .btn-polo {
             display: inline-flex;
             align-items: center;
             gap: 12px;
@@ -194,7 +196,12 @@
             box-shadow: 0 5px 15px rgba(0,119,181,0.3);
         }
 
-        .btn-portfolio:hover, .btn-linkedin:hover {
+        .btn-polo {
+            background: linear-gradient(95deg, #0a4d8c, #063a66);
+            box-shadow: 0 5px 15px rgba(10,77,140,0.4);
+        }
+
+        .btn-portfolio:hover, .btn-linkedin:hover, .btn-polo:hover {
             transform: scale(1.03) translateY(-3px);
         }
 
@@ -206,6 +213,11 @@
         .btn-linkedin:hover {
             background: linear-gradient(95deg, #0088cc, #006699);
             box-shadow: 0 10px 20px rgba(0,119,181,0.4);
+        }
+        
+        .btn-polo:hover {
+            background: linear-gradient(95deg, #0f5ea8, #0a4270);
+            box-shadow: 0 10px 20px rgba(212,175,55,0.3);
         }
 
         .footer-home {
@@ -234,7 +246,7 @@
         }
 
         /* Portfolio Container - Inicialmente escondido */
-        #portfolioContainer {
+        #portfolioContainer, #poloContainer {
             display: none;
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -245,7 +257,7 @@
             h1 { font-size: 2rem; }
             .hero-card { padding: 2rem 1.2rem; }
             .info-chip { padding: 0.4rem 1rem; font-size: 0.75rem; }
-            .btn-portfolio, .btn-linkedin { padding: 0.7rem 1.5rem; font-size: 0.9rem; }
+            .btn-portfolio, .btn-linkedin, .btn-polo { padding: 0.7rem 1.5rem; font-size: 0.8rem; }
             .thragg-mascot { width: 65px; bottom: 0.5rem; left: 0.5rem; }
         }
     </style>
@@ -290,6 +302,11 @@
                 <i class="fas fa-arrow-right"></i>
             </button>
             
+            <button id="openPoloBtn" class="btn-polo">
+                <span>🏫 COLÉGIO UNIDADE POLO</span>
+                <i class="fas fa-graduation-cap"></i>
+            </button>
+            
             <a href="https://www.linkedin.com/in/vinicius-victor-735762337" target="_blank" class="btn-linkedin">
                 <i class="fab fa-linkedin"></i>
                 <span>LINKEDIN</span>
@@ -307,8 +324,11 @@
     </div>
 </div>
 
-<!-- PORTFOLIO CONTAINER (será preenchido dinamicamente) -->
+<!-- PORTFOLIO CONTAINER -->
 <div id="portfolioContainer"></div>
+
+<!-- COLEGIO UNIDADE POLO CONTAINER -->
+<div id="poloContainer"></div>
 
 <div class="thragg-mascot">
     <img src="thrag.image.gif" alt="Thragg" style="width: 100%; border-radius: 18px;" onerror="this.style.display='none'">
@@ -339,54 +359,84 @@
     function showPortfolio() {
         const homeContainer = document.getElementById('homeContainer');
         const portfolioContainer = document.getElementById('portfolioContainer');
+        const poloContainer = document.getElementById('poloContainer');
         
-        // Esconder home com animação
+        if(poloContainer.style.display === 'block') {
+            poloContainer.style.opacity = '0';
+            setTimeout(() => { poloContainer.style.display = 'none'; }, 300);
+        }
+        
         homeContainer.style.transition = 'opacity 0.4s ease';
         homeContainer.style.opacity = '0';
         
         setTimeout(() => {
             homeContainer.style.display = 'none';
             
-            // Se o portfólio já foi carregado, apenas mostra
             if (portfolioContainer.innerHTML.trim() !== '') {
                 portfolioContainer.style.display = 'block';
-                setTimeout(() => {
-                    portfolioContainer.style.opacity = '1';
-                }, 50);
+                setTimeout(() => { portfolioContainer.style.opacity = '1'; }, 50);
             } else {
-                // Injetar o HTML do portfólio
                 portfolioContainer.innerHTML = getPortfolioHTML();
                 portfolioContainer.style.display = 'block';
-                setTimeout(() => {
-                    portfolioContainer.style.opacity = '1';
-                }, 50);
-                // Inicializar accordions
+                setTimeout(() => { portfolioContainer.style.opacity = '1'; }, 50);
                 initPortfolioAccordions();
                 initPortfolioParticles();
             }
         }, 400);
     }
-
-    // Função para voltar para a home
-    function showHome() {
+    
+    // Função para mostrar a página do Colégio Unidade Polo
+    function showPolo() {
         const homeContainer = document.getElementById('homeContainer');
         const portfolioContainer = document.getElementById('portfolioContainer');
+        const poloContainer = document.getElementById('poloContainer');
         
-        portfolioContainer.style.opacity = '0';
+        if(portfolioContainer.style.display === 'block') {
+            portfolioContainer.style.opacity = '0';
+            setTimeout(() => { portfolioContainer.style.display = 'none'; }, 300);
+        }
+        
+        homeContainer.style.transition = 'opacity 0.4s ease';
+        homeContainer.style.opacity = '0';
+        
         setTimeout(() => {
-            portfolioContainer.style.display = 'none';
-            homeContainer.style.display = 'flex';
-            setTimeout(() => {
-                homeContainer.style.opacity = '1';
-            }, 50);
+            homeContainer.style.display = 'none';
+            
+            if (poloContainer.innerHTML.trim() !== '') {
+                poloContainer.style.display = 'block';
+                setTimeout(() => { poloContainer.style.opacity = '1'; }, 50);
+            } else {
+                poloContainer.innerHTML = getPoloHTML();
+                poloContainer.style.display = 'block';
+                setTimeout(() => { poloContainer.style.opacity = '1'; }, 50);
+                initPoloParticles();
+            }
         }, 400);
     }
 
-    // Inicializar accordions do portfólio
+    function showHome() {
+        const homeContainer = document.getElementById('homeContainer');
+        const portfolioContainer = document.getElementById('portfolioContainer');
+        const poloContainer = document.getElementById('poloContainer');
+        
+        if(portfolioContainer.style.display === 'block') {
+            portfolioContainer.style.opacity = '0';
+            setTimeout(() => { portfolioContainer.style.display = 'none'; }, 300);
+        }
+        if(poloContainer.style.display === 'block') {
+            poloContainer.style.opacity = '0';
+            setTimeout(() => { poloContainer.style.display = 'none'; }, 300);
+        }
+        
+        setTimeout(() => {
+            homeContainer.style.display = 'flex';
+            setTimeout(() => { homeContainer.style.opacity = '1'; }, 50);
+        }, 300);
+    }
+
     function initPortfolioAccordions() {
         const headers = document.querySelectorAll('#portfolioContainer .cat-header');
         headers.forEach(header => {
-            // Remove event listeners antigos para evitar duplicação
             const newHeader = header.cloneNode(true);
             header.parentNode.replaceChild(newHeader, header);
             
@@ -397,7 +447,6 @@
                 
                 const isOpen = targetPanel.classList.contains('open');
                 
-                // Fechar todos os outros
                 document.querySelectorAll('#portfolioContainer .links-wrapper').forEach(panel => {
                     if (panel !== targetPanel && panel.classList.contains('open')) {
                         panel.classList.remove('open');
@@ -417,7 +466,6 @@
         });
     }
 
-    // Inicializar partículas do portfólio
     function initPortfolioParticles() {
         const container = document.getElementById('particleFieldPortfolio');
         if (!container) return;
@@ -436,8 +484,27 @@
             container.appendChild(p);
         }
     }
+    
+    function initPoloParticles() {
+        const container = document.getElementById('particleFieldPolo');
+        if (!container) return;
+        container.innerHTML = '';
+        const count = 60;
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            const size = Math.random() * 6 + 2;
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = 8 + Math.random() * 14 + 's';
+            p.style.animationDelay = Math.random() * 15 + 's';
+            p.style.opacity = 0.2 + Math.random() * 0.6;
+            container.appendChild(p);
+        }
+    }
 
-    // HTML completo do portfólio Thragg Codex
+    // HTML do portfólio completo
     function getPortfolioHTML() {
         return `
             <div class="gradient-orb"></div>
@@ -452,7 +519,6 @@
                     <div class="subtitle">forje seu conhecimento com a fúria de um guerreiro cósmico</div>
                 </div>
                 <div class="categories-grid">
-                    <!-- Java -->
                     <div class="cat-card">
                         <div class="cat-header" data-target="javaPanel">
                             <span><i class="fab fa-java" style="color:#e76f00;"></i> Java Exercises</span>
@@ -474,7 +540,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Python -->
                     <div class="cat-card">
                         <div class="cat-header" data-target="pythonPanel">
                             <span><i class="fab fa-python" style="color:#3776ab;"></i> Python Exercises</span>
@@ -487,7 +552,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- HTML -->
                     <div class="cat-card">
                         <div class="cat-header" data-target="htmlPanel">
                             <span><i class="fab fa-html5" style="color:#e34c26;"></i> HTML Exercises</span>
@@ -506,7 +570,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Programação Mobile -->
                     <div class="cat-card">
                         <div class="cat-header" data-target="mobilePanel">
                             <span><i class="fas fa-mobile-alt" style="color:#34a853;"></i> Programação Mobile</span>
@@ -527,9 +590,6 @@
                 <div class="footer">
                     <i class="fas fa-skull"></i> FORJADO POR VINICIUS — READY FOR MY ARRIVAL <i class="fas fa-dragon"></i>
                 </div>
-            </div>
-            <div class="thragg-mascot">
-                <img src="thrag.image.gif" alt="Thragg" style="width: 100%; border-radius: 18px;" onerror="this.style.display='none'">
             </div>
             <style>
                 .portfolio-container {
@@ -707,13 +767,120 @@
             </style>
         `;
     }
+    
+    // HTML do Colégio Unidade Polo - página completa
+    function getPoloHTML() {
+        return `
+            <div class="gradient-orb"></div>
+            <div class="particle-field" id="particleFieldPolo"></div>
+            <div class="home-return" id="backToHomeBtnPolo">
+                <i class="fas fa-home"></i> Voltar ao Início
+            </div>
+            <div class="polo-page">
+                <div class="polo-hero">
+                    <i class="fas fa-school-circle-check"></i>
+                    <h1>COLÉGIO ESTADUAL UNIDADE POLO</h1>
+                    <div class="polo-badge">⚡ Excelência em Educação | Paraná ⚡</div>
+                    <p class="polo-desc">Instituição de ensino referência na formação de jovens visionários, unindo tradição, inovação tecnológica e desenvolvimento humano.</p>
+                </div>
+                
+                <div class="polo-content">
+                    <div class="polo-card info-card">
+                        <i class="fas fa-map-pin"></i>
+                        <h3>Localização</h3>
+                        <p>Paraná, Brasil — Núcleo Regional de Educação<br>Campus de tecnologia e cidadania</p>
+                    </div>
+                    <div class="polo-card missao-card">
+                        <i class="fas fa-bullseye"></i>
+                        <h3>Missão & Visão</h3>
+                        <p>Formar cidadãos críticos, criativos e preparados para os desafios do mundo digital, com base em valores éticos e excelência acadêmica.</p>
+                    </div>
+                    <div class="polo-card estrutura-card">
+                        <i class="fas fa-microchip"></i>
+                        <h3>Infraestrutura Tech</h3>
+                        <p>Laboratórios de informática, sala de robótica, biblioteca interativa, projeto de iniciação científica e núcleo de programação.</p>
+                    </div>
+                    <div class="polo-card destaque-card">
+                        <i class="fas fa-star-of-life"></i>
+                        <h3>Diferenciais</h3>
+                        <p>Programa de aceleração dev, parceria com startups, feira de tecnologia anual, time de e-sports e clube de inovação.</p>
+                    </div>
+                </div>
+                
+                <div class="polo-highlight">
+                    <div class="highlight-box">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>+450 Alunos em cursos técnicos</span>
+                    </div>
+                    <div class="highlight-box">
+                        <i class="fas fa-trophy"></i>
+                        <span>Prêmio Paraná Criativo 2024</span>
+                    </div>
+                    <div class="highlight-box">
+                        <i class="fas fa-globe"></i>
+                        <span>Projetos de extensão internacional</span>
+                    </div>
+                </div>
+                
+                <div class="polo-stats">
+                    <div class="stat-item"><span class="stat-number">28</span><span>Anos de História</span></div>
+                    <div class="stat-item"><span class="stat-number">6</span><span>Cursos Técnicos</span></div>
+                    <div class="stat-item"><span class="stat-number">100%</span><span>Enem preparação integrada</span></div>
+                </div>
+                
+                <div class="polo-footer">
+                    <i class="fas fa-graduation-cap"></i> Colégio Unidade Polo — O futuro começa aqui. <i class="fas fa-rocket"></i>
+                </div>
+            </div>
+            <style>
+                .polo-page {
+                    max-width: 1200px;
+                    margin: 2rem auto;
+                    padding: 1.5rem;
+                    position: relative;
+                    z-index: 2;
+                }
+                .polo-hero {
+                    text-align: center;
+                    margin-bottom: 3rem;
+                    padding: 2.5rem;
+                    background: rgba(8, 12, 20, 0.7);
+                    backdrop-filter: blur(16px);
+                    border-radius: 3rem;
+                    border: 1px solid rgba(10,77,140,0.5);
+                    box-shadow: 0 20px 35px -12px black;
+                }
+                .polo-hero i { font-size: 4rem; color: var(--polo-gold); margin-bottom: 1rem; }
+                .polo-hero h1 { font-size: 2.5rem; background: linear-gradient(135deg, #fff, var(--polo-gold), #0a4d8c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+                .polo-badge { background: #0a4d8c; display: inline-block; padding: 0.4rem 1.5rem; border-radius: 60px; font-weight: bold; margin: 1rem 0; }
+                .polo-desc { max-width: 700px; margin: 0 auto; color: var(--text-dim); }
+                .polo-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.8rem; margin: 3rem 0; }
+                .polo-card { background: rgba(10,45,70,0.7); backdrop-filter: blur(8px); padding: 1.8rem; border-radius: 2rem; text-align: center; border: 1px solid rgba(212,175,55,0.3); transition: 0.25s; }
+                .polo-card i { font-size: 2.5rem; color: var(--polo-gold); margin-bottom: 1rem; }
+                .polo-card h3 { margin-bottom: 0.8rem; font-family: 'Orbitron'; }
+                .polo-card p { color: #ccc; font-size: 0.9rem; line-height: 1.4; }
+                .polo-card:hover { transform: translateY(-8px); border-color: var(--polo-gold); background: rgba(10,77,140,0.5); }
+                .polo-highlight { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.8rem; margin: 2rem 0; }
+                .highlight-box { background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); padding: 1rem 2rem; border-radius: 60px; font-weight: bold; border-left: 4px solid var(--polo-gold); display: flex; align-items: center; gap: 12px; }
+                .polo-stats { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem; margin: 2rem 0; text-align: center; }
+                .stat-item .stat-number { font-size: 2.5rem; font-weight: 800; display: block; color: var(--polo-gold); font-family: 'Orbitron'; }
+                .polo-footer { text-align: center; margin-top: 3rem; padding: 1.2rem; border-top: 1px solid rgba(212,175,55,0.3); }
+                @media (max-width: 700px) {
+                    .polo-hero h1 { font-size: 1.8rem; }
+                    .polo-content { grid-template-columns: 1fr; }
+                }
+            </style>
+        `;
+    }
 
-    // Evento do botão de portfólio
     document.getElementById('openPortfolioBtn').addEventListener('click', showPortfolio);
-
-    // Delegar evento para o botão "Voltar ao Início" que será criado dinamicamente
+    document.getElementById('openPoloBtn').addEventListener('click', showPolo);
+    
     document.body.addEventListener('click', function(e) {
         if (e.target.id === 'backToHomeBtn' || e.target.parentElement?.id === 'backToHomeBtn') {
+            showHome();
+        }
+        if (e.target.id === 'backToHomeBtnPolo' || e.target.parentElement?.id === 'backToHomeBtnPolo') {
             showHome();
         }
     });
