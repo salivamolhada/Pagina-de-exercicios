@@ -166,39 +166,6 @@
   }
 
   /* ============================================================
-     STATS
-     ============================================================ */
-  .stats {
-    display: flex;
-    gap: 40px;
-    padding: 24px 0;
-    margin-bottom: 40px;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .stat .num {
-    font-size: 1.7rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    /* Gradiente + sombra 3D */
-    background: linear-gradient(180deg, var(--accent-light) 0%, var(--accent) 60%, var(--accent-dark) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(139, 92, 246, 0.3));
-  }
-
-  .stat .lbl {
-    font-size: 0.72rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-top: 4px;
-    font-weight: 500;
-  }
-
-  /* ============================================================
      BOTÕES 3D
      ============================================================ */
   .actions {
@@ -512,8 +479,6 @@
   @media (max-width: 640px) {
     .wrap { padding: 48px 18px 40px; }
     h1 { font-size: 1.8rem; }
-    .stats { gap: 24px; flex-wrap: wrap; }
-    .stat .num { font-size: 1.4rem; }
     .top-bar { flex-direction: column; align-items: flex-start; gap: 14px; }
     .cat-head { padding: 15px 16px; }
     .cat-title { font-size: 0.9rem; }
@@ -533,21 +498,13 @@
     <div class="role"><span class="dot"></span>Desenvolvedor</div>
 
     <p class="bio">
-      Estudante de Desenvolvimento de Sistemas apaixonado por tecnologia,
-      inovação e educação. Construindo soluções que transformam ideias em realidade.
+      Estudante de Desenvolvimento de Sistemas apaixonado por tecnologia
+      e inovação. Construindo soluções que transformam ideias em realidade.
     </p>
 
     <div class="meta">
       <span>Paraná, Brasil</span>
       <span>Java · Python · JavaScript</span>
-      <span>Prêmio Paraná Criativo 2024</span>
-      <span>Colégio Estadual Unidade Polo</span>
-    </div>
-
-    <div class="stats">
-      <div class="stat"><div class="num">28</div><div class="lbl">Anos de História</div></div>
-      <div class="stat"><div class="num">6</div><div class="lbl">Cursos Técnicos</div></div>
-      <div class="stat"><div class="num">100%</div><div class="lbl">Preparação ENEM</div></div>
     </div>
 
     <div class="actions">
